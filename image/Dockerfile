@@ -1,4 +1,4 @@
-FROM jupyter/tensorflow-notebook
+FROM jupyter/tensorflow-notebook:lab-4.0.3
 
 # Add RUN statements to install packages as the $NB_USER defined in the base images.
 
