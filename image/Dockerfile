@@ -1,13 +1,19 @@
 FROM jupyter/tensorflow-notebook:lab-4.0.3
 
 # Add RUN statements to install packages as the $NB_USER defined in the base images.
+RUN pip install --no-cache-dir 'opencv-contrib-python' '' && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
 
 # Add a "USER root" statement followed by RUN statements to install system packages using apt-get,
 # change file permissions, etc.
 USER root
 RUN apt-get update \
   && apt-get -y install tesseract-ocr \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
+  fix-permissions "${CONDA_DIR}" && \
+  fix-permissions "/home/${NB_USER}"
 
 # If you do switch to root, always be sure to add a "USER $NB_USER" command at the end of the
 # file to ensure the image runs as a unprivileged user by default.
