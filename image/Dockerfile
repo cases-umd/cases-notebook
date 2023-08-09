@@ -14,6 +14,9 @@ RUN apt-get update \
 USER $NB_USER
 
 # Add RUN statements to install packages as the $NB_USER defined in the base images.
-RUN pip install --no-cache-dir 'opencv-contrib-python' 'pytesseract' 'Pillow' && \
+RUN conda install --quiet --yes \
+    'opencv-contrib-python' \
+    'pytesseract' \
+    'Pillow' && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
