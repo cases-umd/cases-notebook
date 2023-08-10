@@ -4,7 +4,7 @@ FROM jupyter/tensorflow-notebook:lab-4.0.3
 # change file permissions, etc.
 USER root
 RUN apt-get update \
-  && apt-get -y install tesseract-ocr \
+  && apt-get -y install tesseract-ocr python3-pip \
   && rm -rf /var/lib/apt/lists/* \
   fix-permissions "${CONDA_DIR}" && \
   fix-permissions "/home/${NB_USER}"
@@ -14,10 +14,6 @@ RUN apt-get update \
 USER $NB_USER
 
 # Add RUN statements to install packages as the $NB_USER defined in the base images.
-RUN mamba install --yes \
-    'opencv-contrib-python' \
-    'pytesseract' \
-    'Pillow' && \
-    mamba clean --all -f -y && \
+RUN pip install --no-cache-dir 'opencv-contrib-python' 'pytesseract' 'Pillow' && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
