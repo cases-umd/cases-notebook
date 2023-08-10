@@ -14,9 +14,10 @@ RUN apt-get update \
 USER $NB_USER
 
 # Add RUN statements to install packages as the $NB_USER defined in the base images.
-RUN conda install --quiet --yes \
+RUN mamba install --yes \
     'opencv-contrib-python' \
     'pytesseract' \
     'Pillow' && \
+    mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
