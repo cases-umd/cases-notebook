@@ -4,7 +4,7 @@ FROM jupyter/tensorflow-notebook:lab-4.0.3
 # change file permissions, etc.
 USER root
 RUN apt-get update \
-  && apt-get -y install tesseract-ocr python3-pip \
+  && apt-get -y install tesseract-ocr   python3-pip \
   && rm -rf /var/lib/apt/lists/* \
   fix-permissions "/home/${NB_USER}"
 
