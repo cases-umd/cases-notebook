@@ -6,7 +6,6 @@ USER root
 RUN apt-get update \
   && apt-get -y install tesseract-ocr python3-pip \
   && rm -rf /var/lib/apt/lists/* \
-  fix-permissions "${CONDA_DIR}" && \
   fix-permissions "/home/${NB_USER}"
 
 # If you do switch to root, always be sure to add a "USER $NB_USER" command at the end of the
@@ -15,5 +14,4 @@ USER $NB_USER
 
 # Add RUN statements to install packages as the $NB_USER defined in the base images.
 RUN pip install --no-cache-dir 'opencv-contrib-python' 'pytesseract' 'Pillow' && \
-    fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
